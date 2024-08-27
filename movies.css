@@ -1,0 +1,221 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+main {
+  margin: auto;
+  max-width: 800px;
+}
+
+/* Corpo e estrutura principal */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #141414;
+  color: #fff;
+}
+
+h1 {
+  color: #e50914;
+  font-weight: bold;
+}
+
+.cabecario {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #141414;
+  border-bottom: 2px solid #e50914;
+}
+
+.cabecario__lista {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.cabecario__link {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.cabecario__link:hover {
+  color: #e50914;
+}
+
+/* Seção principal de busca de filmes */
+.filme {
+  padding-top: 40px;
+  text-align: center;
+}
+
+.container__titulo {
+  font-size: 36px;
+  margin-bottom: 30px;
+}
+
+.container__busca {
+  margin: auto;
+  max-width: 600px;
+  margin-bottom: 30px;
+  display: inline-block;
+  margin-bottom: 30px;
+}
+
+hr {
+  margin: auto;
+  width: 80%;
+}
+
+.date {
+  font-size: 12px !important;
+  color: red;
+  margin-top: 10px;
+}
+
+.summary {
+  margin: auto;
+  max-width: 600px;
+  margin-bottom: 30px;
+  margin-top: 30px;
+
+  word-break: break-all;
+  text-align: center;
+}
+
+.moviesfound {
+  max-width: 600px;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+.lasttitles{
+  margin-top: 30px;
+  color: white;
+}
+
+#listmovies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 30px;
+  list-style-type: none;
+}
+
+.logoButton {
+  text-decoration: none;
+}
+
+.info {
+  padding: 10px;
+  font-size: 18px;
+  width: 300px;
+  border: 1px solid #333;
+  border-radius: 5px;
+}
+
+.botao {
+  background-color: #e50914;
+  color: #fff;
+  padding: 12px 20px;
+  margin-left: 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.botao:hover {
+  background-color: #f40612;
+}
+
+.btnMovie {
+  color: #f40612;
+  font-size: 1.2rem;
+  padding: 8px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: none;
+}
+
+.btnMovie:hover {
+    color: white;
+
+}
+
+/* Resultados da busca */
+.resultado {
+  margin-top: 20px;
+}
+
+.resultado p {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+/* Rodapé */
+.rodape {
+  background-color: #141414;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  margin-top: 50px;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none; /* Evita interferência no hover */
+}
+
+/* Estilo aplicado quando o overlay está visível */
+.overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+  
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.rodape__texto {
+  color: #737373;
+}
+
+.movietitle {
+  width: 100%;
+  margin: 20px;
+}
+
+.movietitle h3 {
+  font-size: 3rem;
+}
+
+.vistos {
+  max-width: 600px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  gap: 24px;
+}
