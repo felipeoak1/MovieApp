@@ -89,7 +89,7 @@ header nav ul li a:hover {
 /* Seção de destaque (hero) */
 .hero {
   height: 100vh;
-  background: url('./the_netflix_login_background__canada__2024___by_logofeveryt_dh0w8qv-pre.jpg') center/cover no-repeat;
+  background: url('../the_netflix_login_background__canada__2024___by_logofeveryt_dh0w8qv-pre.jpg') center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;

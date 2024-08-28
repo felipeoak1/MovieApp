@@ -3,41 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gêneros - Site de Cinema</title>
-    <link rel="stylesheet" href="genres.css">
+    <title>Xilften</title>
+    <link rel="stylesheet" href="../assets/styles/genres.css">
 </head>
 <body onload="getSeries()">
 
     <header class="cabecario">
         <div class="logo">
-            <h1>Xilften</h1>
+            <a href="genres.html"><h1>Xilften</h1></a>
         </div>
         <nav>
             <ul class="cabecario__lista">
-                <li class="cabecario__item"><a href="index.html" class="cabecario__link">Início</a></li>
-                <li class="cabecario__item"><a href="genres.html" class="cabecario__link">Filmes</a></li>
-                <li class="cabecario__item"><a href="movies.html" class="cabecario__link">Buscar Filmes</a></li>
-                <li class="cabecario__item"><a href="about.html" class="cabecario__link">Sobre</a></li>
+                <li class="cabecario__item"><a href="../app/genres.html" class="cabecario__link">Início</a></li>
+                <li class="cabecario__item"><a href="../app/movies.html" class="cabecario__link">Buscar Filmes</a></li>
+                <li class="cabecario__item"><a href="../app/about.html" class="cabecario__link">Sobre</a></li>
             </ul>
         </nav>
     </header>
     
     <main class="conteudo">
-        <div id="loader" style="display: none;">Carregando...</div>
 
         <h2 class="conteudo__titulo">Filmes Disponíveis</h2>
-        <ul id="generos" class="generos__lista"></ul>
+        <div id="sectionmovie">
+            <ul id="filmes" class="filmes__lista"></ul> 
+        </div>
+        
+
         <div class="paginacao">
             <button id="prevPage" onclick="changePage(-1)">Página Anterior</button>
             <span id="pageNum">1</span>
             <button id="nextPage" onclick="changePage(1)">Próxima Página</button>
         </div>
+
     </main>
 
     <footer class="rodape">
         <p class="rodape__texto">&copy; 2024 Xilften</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="../script.js"></script>
 </body>
 </html>

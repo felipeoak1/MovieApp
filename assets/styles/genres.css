@@ -23,6 +23,14 @@ footer p {
   color: #737373;
 }
 
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  color: #e50914;
+}
+
 /* Estilo do cabeçalho */
 .cabecario {
   display: flex;
@@ -47,7 +55,7 @@ footer p {
 }
 
 .cabecario__link:hover {
-  color: #e50914;
+  color: white
 }
 
 .conteudo {
@@ -62,7 +70,7 @@ footer p {
   margin-bottom: 20px;
 }
 
-.generos__lista {
+.filmes__lista {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -128,6 +136,85 @@ footer p {
   gap: 8px;
 }
 
+
+#divbox {
+  display: flex;
+  max-width: 800px;
+  margin: auto;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#closebutton {
+  align-self: end;
+  
+  background-color: red; 
+  color: white;
+  border: 2px solid red; 
+  border-radius: 50%; 
+  width: 30px; 
+  height: 30px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold; 
+  cursor: pointer; 
+  transition: background-color 0.3s, border-color 0.3s; 
+}
+
+#closebutton:hover {
+  background-color: white; 
+  color: red; 
+  border-color: white; 
+}
+
+#divdescription {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+}
+
+
+.overlaystyle {
+  color: white; 
+  font-family: Arial, sans-serif; 
+  padding: 20px; 
+  text-align: center;
+
+  background-color: rgba(0, 0, 0, 0.8); /* Fundo preto com 80% de opacidade */
+  border: 1px solid red;
+  border-radius: 10px; /* Borda arredondada para um efeito mais suave */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra para destacar o overlay */
+}
+
+
+.overlaystyle h2 {
+  font-size: 24px; 
+  margin: 0 0 10px; 
+  font-weight: bold; 
+}
+
+
+.overlaystyle p {
+  font-size: 16px; 
+  margin: 10px 0; 
+}
+
+
+.overlaystyle p:last-of-type {
+  font-size: 18px;
+  font-weight: bold; 
+  color: yellow; 
+}
+
+
 .paginacao {
   display: flex;
   justify-content: center;
@@ -170,3 +257,4 @@ footer p {
   transform: scale(0.95);
 }
   
+

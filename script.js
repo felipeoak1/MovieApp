@@ -1,30 +1,25 @@
 const API_KEY = '9e477a7e86b75afe820d71aff0edf369';
 const BASE_URL = 'https://api.themoviedb.org/3';
+
 let lastfind = []
 let dados = JSON.parse(localStorage.getItem('dados')) || []
-let userLogged = false
-
 let currentPage = 1;
 const totalPages = 1000; // Número máximo de páginas permitidas pela API
 
+
 function openFile() {
-    // Defina o caminho para o arquivo local que você deseja abrir
-    const filePath = './Novo projeto.mp4'; // substitua com o caminho correto
+   
+    const filePath = './assets/Novo projeto.mp4';
     
-    // Crie um link temporário
     const a = document.createElement('a');
     a.href = filePath;
-    a.target = '_blank'; // abre em uma nova aba
+    a.target = '_blank'; 
     a.click();
 }
 
 async function getSeries(page = 1) {
-    let listGeneros = document.getElementById("generos");
-    let loader = document.getElementById("loader");
+    let listFilmes = document.getElementById("filmes");
     let series;
-    
-    // Mostrar o loader
-    loader.style.display = 'block';
     
     const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=pt-BR&page=${page}&sort_by=popularity.desc`;
     const options = {
@@ -41,19 +36,19 @@ async function getSeries(page = 1) {
     } catch (err) {
         console.error('error:' + err);
     }
-
-    // Esconder o loader após o carregamento
-    loader.style.display = 'none';
     
-    listGeneros.innerHTML = ''; 
+    listFilmes.innerHTML = ''; 
 
     let limitedMovies = series.results.slice(0, 18);
       
     for (let c of limitedMovies) {
-        listGeneros.innerHTML += `
-            <li class="generos__item" onmouseenter="showOverlay(this)" onmouseleave="hideOverlay(this)"
+        listFilmes.innerHTML += `
+            <li class="generos__item" onmouseenter="showOverlay(this)" onmouseleave="hideOverlay(this)" onclick="opendescription(this)"
                 data-title="${c.title || "Sem informação"}" 
-                data-overview="${c.release_date}">
+                data-overview="${c.release_date}"
+                data-description="${c.overview}"
+                data-poster="${c.poster_path}"
+                data-vote="${c.vote_average}">
                 <img src="https://image.tmdb.org/t/p/w300/${c.backdrop_path}" width="200px" alt="${c.title}">
             </li>
         `;
@@ -73,6 +68,7 @@ function changePage(pg) {
 
 function showOverlay(element) {
     let overlay = element.querySelector('.overlay');
+
     if (!overlay) {
         const title = element.getAttribute('data-title');
         const overview = element.getAttribute('data-overview');
@@ -85,7 +81,7 @@ function showOverlay(element) {
         `;
         element.appendChild(overlay);
     }
-
+    
     overlay.classList.add('visible');
 }
 
@@ -96,6 +92,43 @@ function hideOverlay(element) {
     }
 }
 
+function opendescription(element) {
+    let sectionmovie = document.getElementById('sectionmovie')
+
+    const title = element.getAttribute('data-title');
+    const data = element.getAttribute('data-overview');
+    const description = element.getAttribute('data-description')
+    const poster = element.getAttribute('data-poster')
+    const vote = element.getAttribute('data-vote')
+
+
+
+    const div = document.createElement('div')
+    div.setAttribute('id', 'divdescription')
+
+
+    div.innerHTML = `
+        <div id="divbox" class="overlaystyle">
+            <button onclick="closedescription(this)" id="closebutton">X</button>
+            <img src="https://image.tmdb.org/t/p/w500${poster}" alt="${title}" style="width:200px; align-self: center;">
+            <h2>${title}</h2>
+            <p>${data}</p>
+            <p>${description}</p>
+            <p>NOTA: ${Math.round(Number(vote))}</p>
+        </div>
+
+    `
+    sectionmovie.appendChild(div)
+}
+
+function closedescription(element) {
+    let sectionmovie = document.getElementById('sectionmovie');
+    let div = document.getElementById('divdescription');
+
+        if (div) {
+        sectionmovie.removeChild(div);
+    }
+}
 
 async function getPopularMovies() {
     let listmovies = document.getElementById("listmovies")
@@ -116,51 +149,23 @@ async function getPopularMovies() {
         movies = json
     })
     .catch(err => console.error('error:' + err));
-
+    console.log(movies)
     let limitedMovies = movies.results.slice(0, 12);
 
     for (c of limitedMovies) {
         listmovies.innerHTML += `
-            <li style="position: relative;" onmouseenter="showOverlay(this)" onmouseleave="hideOverlay(this)"
+            <li style="position: relative;" onmouseenter="showOverlay(this)" onmouseleave="hideOverlay(this)" onclick="opendescription(this)""
                 data-title="${c.title || "Sem informação"}" 
-                data-overview="${c.release_date}">
+                data-overview="${c.release_date}"
+                data-description="${c.overview}"
+                data-poster="${c.poster_path}"
+                data-vote="${c.vote_average}">
                 <img src="https://image.tmdb.org/t/p/w300/${c.backdrop_path}" width="250px">
             </li>
         `;
     }
 
 }
-
-function showOverlay(element) {
-    let overlay = element.querySelector('.overlay');
-    if (!overlay) {
-        // Obtém as informações dos atributos data-*
-        const title = element.getAttribute('data-title');
-        const overview = element.getAttribute('data-overview');
-
-        // Cria o overlay se não existir
-        overlay = document.createElement('div');
-        overlay.className = 'overlay';
-        overlay.innerHTML = `
-            <h2>${title}</h2>
-            <p>${overview}</p>
-        `;
-        element.appendChild(overlay);
-    }
-
-    // Adiciona a classe 'visible' para mostrar o overlay
-    overlay.classList.add('visible');
-}
-
-function hideOverlay(element) {
-    const overlay = element.querySelector('.overlay');
-    if (overlay) {
-        // Remove a classe 'visible' para esconder o overlay
-        overlay.classList.remove('visible');
-    }
-}
-
-
 
 
 function exibirLoginForm() {
@@ -184,19 +189,15 @@ function exibirLoginForm() {
 
 function login(event) {
     event.preventDefault()
+
     const loginBox = document.getElementById('loginbox');
-
-
     let emaillogin = document.getElementById("emaillogin")
     let passwordlogin = document.getElementById("passwordlogin")
 
-    console.log(emaillogin.value, passwordlogin.value)
-    console.log(dados)
-    
     let userRegisted = dados.find(ele => ele.email == emaillogin.value && ele.password == passwordlogin.value)
 
     if (userRegisted) {
-        window.location.href = './movies.html'
+        window.location.href = './genres.html'
     } else {
         loginBox.innerHTML = `<h2 class="h2login">Login</h2>
         <p class="errorlogin" id="errorlogin">Tente Novamente</p>
@@ -279,7 +280,7 @@ async function buscarFilme() {
     }
     
     try {
-        const resposta = await fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(titulo)}`);
+        const resposta = await fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(titulo)}&language=pt-BR`);
         const dados = await resposta.json();
         if (dados.results.length > 0) {
             const filme = dados.results[0];
@@ -301,7 +302,7 @@ async function buscarFilme() {
 
                 <p class="summary">${filme.overview}</p>
                 
-
+                <br>
                 ${lastfind.length > 0 ? '<hr>' : null}
                 ${lastfind.length > 0 ? '<h1 class="lasttitles">Recentes</h1>' : null}
             `;
@@ -312,10 +313,11 @@ async function buscarFilme() {
             for (const c of lastfind) {
                 moviesfound.innerHTML += `
                     <div class="moviesfound">
-                        <img src="https://image.tmdb.org/t/p/w500${c.image}" alt="${c.title}" style="width:100px;" />
+                        <img src="https://image.tmdb.org/t/p/w500${c.image}" alt="${c.title}" style="width: 100px;" />
                     </div>
                 `;
             }
+
 
 
         } else {
@@ -325,6 +327,7 @@ async function buscarFilme() {
         resultadoDiv.innerHTML = '<p>Erro ao buscar filme. Tente novamente mais tarde.</p>';
     }
 }
+
 
 async function carregarGeneros() {
     const generosDiv = document.getElementById('generos');
