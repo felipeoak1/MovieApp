@@ -100,6 +100,10 @@ a:visited {
   font-weight: bold;
 }
 
+.logo  a:visited {
+  text-decoration: none;
+}
+
 .loader {
   position: absolute;
   width: 100%;
