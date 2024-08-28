@@ -9,7 +9,7 @@ const totalPages = 1000; // Número máximo de páginas permitidas pela API
 
 function openFile() {
    
-    const filePath = './assets/Novo projeto.mp4';
+    const filePath = '../assets/Novoprojeto.mp4';
     
     const a = document.createElement('a');
     a.href = filePath;
